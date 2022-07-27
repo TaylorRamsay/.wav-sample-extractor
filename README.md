@@ -3,7 +3,7 @@
 This python script makes use of the [aubio](https://aubio.org/) python library to extract sample data from a .wav file.
 
 ## How does it work?
-For my specific use, it extracts the data from a .wav file that I composed in [Ableton Live](https://www.ableton.com/en/live/what-is-live/) and converts the resulting ***numpy.array*** into an array of ***floats***, due to the nature of extracting sample data from a .wav file, there were many outliers in th data that I sorted and normalized in a range of 0-50.
+For my specific use, it extracts the data from a .wav file that I composed in [Ableton Live](https://www.ableton.com/en/live/what-is-live/) and converts the resulting ***numpy.array*** into an array of ***floats***, due to the nature of extracting sample data from a .wav file, there were many outliers in the data that I sorted and normalized in a range of 0-50.
 <br/>
 This is then output to a .csv or .txt file for other use cases.
 
