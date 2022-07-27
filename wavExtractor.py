@@ -17,6 +17,7 @@ chiraAubio = aubio.source("C:\\Users\\CDK345\Desktop\wavExtractor\\ChiraStems\\C
 total_read = 0
 nums = []
 
+print("Extracting data.......")
 while True:
     samples, read = chiraAubio()
     nums.append(np.format_float_positional(samples.sum()))
@@ -33,6 +34,7 @@ segToSort = []
 final = []
 range_to_normalize = (0,50)
 
+print("Sorting and normalizing data........")
 for i in range(len(numsFloats) - 1):
     if numsFloats[i] < 1 and numsFloats[i + 1] > 30:
         segToSort = sorted(temp, key = float)
@@ -44,16 +46,13 @@ for i in range(len(numsFloats) - 1):
         temp.append(numsFloats[i])
 
 
-# Sorts
-#sorted = sorted(numsFloats, key = float)
-
-# Reverses
-#reverseSorted = sorted.reverse()
-
-    
-# display original and normalized array
 file = open("sorted.txt", "w")
 for x in final:
     file.write(str(x) + "\n")
+
+print("Done.......")
+# Displays original array
 #print("Original Array = ", sorted)
+
+# Displays normalized array
 #print("Normalized Array = ",normalized_array_1d)
