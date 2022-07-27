@@ -1,5 +1,6 @@
 import numpy as np
 import aubio
+import csv
 
 # explicit function to normalize array
 def normalize(arr, t_min, t_max):
@@ -34,6 +35,9 @@ segToSort = []
 final = []
 range_to_normalize = (0,50)
 
+csvOutput = open("output.csv", "w")
+writer = csv.writer(csvOutput)
+
 print("Sorting and normalizing data........")
 for i in range(len(numsFloats) - 1):
     if numsFloats[i] < 1 and numsFloats[i + 1] > 30:
@@ -42,13 +46,17 @@ for i in range(len(numsFloats) - 1):
         normalizedSeg = normalize(segToSort, range_to_normalize[0], range_to_normalize[1])
         normalizedSeg.reverse()
         final.append(normalizedSeg)
+
+        for x in normalizedSeg:
+            writer.writerow([str(x)])
     else:
         temp.append(numsFloats[i])
 
 
-file = open("sorted.txt", "w")
-for x in final:
-    file.write(str(x) + "\n")
+
+#file = open("sorted.txt", "w")
+#for x in final:
+ #   file.write(str(x) + "\n")
 
 print("Done.......")
 # Displays original array
