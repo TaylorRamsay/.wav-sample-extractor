@@ -14,7 +14,7 @@ def normalize(arr, t_min, t_max):
 
 #Aubio
 print("\nAubio........")
-chiraAubio = aubio.source("C:\\Users\\CDK345\Desktop\wavExtractor\\ChiraStems\\Chords.wav")
+chiraAubio = aubio.source("C:\\Users\FSK8475\Documents\GitHub\.wav-sample-extractor\\ChiraStems\\Chords.wav")
 total_read = 0
 nums = []
 
@@ -33,9 +33,9 @@ numsFloats = [float(ele) for ele in nums]
 temp = []
 segToSort = []
 final = []
-range_to_normalize = (0,50)
+range_to_normalize = (0,100)
 
-csvOutput = open("output.csv", "w")
+csvOutput = open("chordsOutput.csv", "w")
 writer = csv.writer(csvOutput)
 
 print("Sorting and normalizing data........")
