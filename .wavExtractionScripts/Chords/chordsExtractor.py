@@ -36,8 +36,7 @@ print("Done.......\n")
 
 temp = []
 segToSort = []
-final = []
-range_to_normalize = (0,100)
+range_to_normalize = (0,15)
 
 csvOutput = open(".wavExtractionScripts\\Chords\\chordsOutput.csv", "w")
 writer = csv.writer(csvOutput)
@@ -49,7 +48,6 @@ for i in range(len(numsFloats) - 1):
         temp.clear()
         normalizedSeg = normalize(segToSort, range_to_normalize[0], range_to_normalize[1])
         normalizedSeg.reverse()
-        final.append(normalizedSeg)
 
         for x in normalizedSeg:
             writer.writerow([str(x)])

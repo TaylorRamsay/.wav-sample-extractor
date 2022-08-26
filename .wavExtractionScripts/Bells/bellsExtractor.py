@@ -46,14 +46,12 @@ for i in range(len(numsFloats) - 1):
     if numsFloats[i] >= .1:
         temp.append(5)
         maximaIndices.append(i)
-
     else:
         if numsFloats[i] < 1:
             numsFloats[i] = 0.0001
         temp.append(numsFloats[i])
 
 count = 0
-
 for x in maximaIndices:
     while count < padWindow:
         temp[x + count] = temp[x]
