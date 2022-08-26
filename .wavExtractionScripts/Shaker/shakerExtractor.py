@@ -29,7 +29,7 @@ while True:
 numsFloats = [float(ele) for ele in nums]
 
 print("Writing raw output to rawOutput.txt")
-file = open("Shaker\\rawOutput.txt", "w")
+file = open(".wavExtractionScripts\\Shaker\\rawOutput.txt", "w")
 for x in numsFloats:
     file.write(str(x) + "\n\n")
 print("Done.......\n")
@@ -56,7 +56,7 @@ for x in maximaIndices:
         count += 1
     count = 0
 
-csvOutput = open("Shaker\\shakerOutput.csv", "w")
+csvOutput = open(".wavExtractionScripts\\Shaker\\shakerOutput.csv", "w")
 writer = csv.writer(csvOutput)
 
 print("Writing output to shakerOutput.csv")

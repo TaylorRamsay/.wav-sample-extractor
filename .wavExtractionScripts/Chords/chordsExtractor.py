@@ -13,12 +13,11 @@ def normalize(arr, t_min, t_max):
     return norm_arr
 
 #Aubio
-print("\nAubio........")
 chiraAubio = aubio.source("C:\\Users\FSK8475\Documents\GitHub\.wav-sample-extractor\\ChiraStems\\Chords.wav")
 total_read = 0
 nums = []
 
-print("Extracting data.......")
+print("Extracting data using Aubio library.......")
 while True:
     samples, read = chiraAubio()
     nums.append(np.format_float_positional(samples.sum()))
@@ -26,16 +25,21 @@ while True:
     if read < chiraAubio.hop_size:
         break
 
-
 # Convert string list nums to float list numsFloats
 numsFloats = [float(ele) for ele in nums]
+
+print("Writing raw output to rawOutput.txt")
+file = open(".wavExtractionScripts\\Chords\\rawOutput.txt", "w")
+for x in numsFloats:
+    file.write(str(x) + "\n\n")
+print("Done.......\n")
 
 temp = []
 segToSort = []
 final = []
 range_to_normalize = (0,100)
 
-csvOutput = open("Chords\\chordsOutput.csv", "w")
+csvOutput = open(".wavExtractionScripts\\Chords\\chordsOutput.csv", "w")
 writer = csv.writer(csvOutput)
 
 print("Sorting and normalizing data........")
@@ -52,15 +56,6 @@ for i in range(len(numsFloats) - 1):
     else:
         temp.append(numsFloats[i])
 
-
-
-#file = open("sorted.txt", "w")
-#for x in final:
- #   file.write(str(x) + "\n")
-
-print("Done.......")
-# Displays original array
-#print("Original Array = ", sorted)
-
-# Displays normalized array
-#print("Normalized Array = ",normalized_array_1d)
+print("Processed output written to chordsOutput.csv")
+print("Done.......\n")
+print("Extraction complete........")

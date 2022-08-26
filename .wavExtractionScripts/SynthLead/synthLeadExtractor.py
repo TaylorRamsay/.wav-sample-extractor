@@ -12,8 +12,7 @@ def normalize(arr, t_min, t_max):
         norm_arr.append(temp)
     return norm_arr
 
-#Aubio
-chiraAubio = aubio.source("C:\\Users\FSK8475\Documents\GitHub\.wav-sample-extractor\\visualEdits\\Bells.wav")
+chiraAubio = aubio.source("C:\\Users\FSK8475\Documents\GitHub\.wav-sample-extractor\\visualEdits\\SynthLead.wav")
 total_read = 0
 nums = []
 
@@ -25,49 +24,23 @@ while True:
     if read < chiraAubio.hop_size:
         break
 
-
 # Convert string list nums to float list numsFloats
 numsFloats = [float(ele) for ele in nums]
 
 print("Writing raw output to rawOutput.txt")
-file = open("Bells\\rawOutput.txt", "w")
+file = open(".wavExtractionScripts\\SynthLead\\rawOutput.txt", "w")
 for x in numsFloats:
     file.write(str(x) + "\n\n")
 print("Done.......\n")
 
-temp = []
-final = []
-range_to_normalize = (0,10)
-
-maximaIndices = []
-padWindow = 4
-
-for i in range(len(numsFloats) - 1):
-    if numsFloats[i] >= .1:
-        temp.append(5)
-        maximaIndices.append(i)
-
-    else:
-        if numsFloats[i] < 1:
-            numsFloats[i] = 0.0001
-        temp.append(numsFloats[i])
-
-count = 0
-
-for x in maximaIndices:
-    while count < padWindow:
-        temp[x + count] = temp[x]
-        temp[x - count] = temp[x]
-        count += 1
-    count = 0
-
-csvOutput = open("Bells\\bellsOutput.csv", "w")
+csvOutput = open(".wavExtractionScripts\\SynthLead\\synthLeadOutput.csv", "w")
 writer = csv.writer(csvOutput)
 
-print("Writing output to bellsOutput.csv")
-for x in temp:
+print("Writing output to synthLeadOutput.csv")
+for x in numsFloats:
+    if x < 0.01:
+        x = 0.0001
     writer.writerow([str(x)])
-    #print(str(x)) 
+    #print(str(x))   
 print("Done.......\n")
-
 print("Extraction complete........")

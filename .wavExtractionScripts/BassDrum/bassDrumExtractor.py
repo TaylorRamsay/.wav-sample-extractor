@@ -13,7 +13,7 @@ def normalize(arr, t_min, t_max):
     return norm_arr
 
 #Aubio
-chiraAubio = aubio.source("C:\\Users\FSK8475\Documents\GitHub\.wav-sample-extractor\\visualEdits\\WindChimes.wav")
+chiraAubio = aubio.source("C:\\Users\FSK8475\Documents\GitHub\.wav-sample-extractor\\ChiraStems\\Bass Drum.wav")
 total_read = 0
 nums = []
 
@@ -25,45 +25,40 @@ while True:
     if read < chiraAubio.hop_size:
         break
 
-
 # Convert string list nums to float list numsFloats
 numsFloats = [float(ele) for ele in nums]
 
 print("Writing raw output to rawOutput.txt")
-file = open("WindChimes\\rawOutput.txt", "w")
+file = open(".wavExtractionScripts\\BassDrum\\rawOutput.txt", "w")
 for x in numsFloats:
-    file.write(str(x) + "\n\n")
+    file.write(str(x) + "\n" + "\n")
 print("Done.......\n")
 
 temp = []
-maximaIndices = []
-padWindow = 5
+final = []
+range_to_normalize = (0,15)
 
+print("Sorting and normalizing data........")
 for i in range(len(numsFloats) - 1):
-    if numsFloats[i] >= 0.0008:
-        temp.append(5)
-        maximaIndices.append(i)
+    if numsFloats[i] >= 50:
+        temp.append(numsFloats[i])
+        temp[i - 1] = numsFloats[i]
+        temp[i - 2] = numsFloats[i]
+        temp[i - 3] = numsFloats[i]
+        temp[i - 4] = numsFloats[i]
+        temp[i - 5] = numsFloats[i]
 
     else:
-        if (numsFloats[i] < 0.9):
-            numsFloats[i] = 0.0001
+        if (numsFloats[i] < 100):
+            numsFloats[i] = 0.1
         temp.append(numsFloats[i])
 
-count = 0
-
-for x in maximaIndices:
-    while count < padWindow:
-        temp[x + count] = temp[x]
-        temp[x - count] = temp[x]
-        count += 1
-    count = 0
-
-csvOutput = open("WindChimes\\windChimesOutput.csv", "w")
+csvOutput = open(".wavExtractionScripts\\BassDrum\\BassDrum.csv", "w")
 writer = csv.writer(csvOutput)
-print("Writing output to windChimesOutput.csv")
+
+print("Writing output to BassDrum.csv")
 for x in temp:
     writer.writerow([str(x)])
-    #print(str(x))
 print("Done.......\n")
 
 print("Extraction complete........")
